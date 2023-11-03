@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  - const results = [{ flavour: 'Choco-Chip',   quantity: '2', price: 6.99 },{ flavour: 'Butterscotch', quantity: '3', price: 9.99 },{ flavour: 'Chocolate',    quantity: '1', price: 3.99 }]
+
+  .container-fluid
+    .row
+      each icecream,index in results
+        div(class="col-sm-2" onclick=`buy(${index})`)
+          h3 #{icecream.flavour}
+          p Quantity: #{icecream.quantity}
+          p Price: $#{icecream.price}
+  
+  script.
+    function buy(index) {
+        alert(`You purchased : ${index}`)
+    }
