@@ -20,11 +20,11 @@ exports.icecream_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: icecream update PUT' + req.params.id);
 };
 
-// List of all Costumes
-exports.costume_list = async function(req, res) {
+// List of all icecream
+exports.icecream_list = async function(req, res) {
     try{
-    theCostumes = await Costume.find();
-    res.send(theCostumes);
+    theicecream = await icecream.find();
+    res.send(theicecream);
     }
     catch(err){
     res.status(500);
@@ -32,3 +32,33 @@ exports.costume_list = async function(req, res) {
     }
     };
     
+   // VIEWS
+// Handle a show all view
+exports.icecream_view_all_Page = async function(req, res) {
+try{
+theicecream = await icecream.find();
+res.render('icecream', { title: 'icecream Search Results', results: theicecream });
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
+
+// Handle Costume create on POST.
+exports.icecream_create_post = async function(req, res) {
+console.log(req.body)
+let document = new icecream();
+
+document.flavour = req.body.flavour;
+document.quantity = req.body.quantity;
+document.price = req.body.price;
+try{
+let result = await document.save();
+res.send(result);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
