@@ -14,7 +14,8 @@ router.delete('/icecream/:id', icecream_controller.icecream_delete);
 // PUT request to update icecream.
 router.put('/icecream/:id', icecream_controller.icecream_update_put);
 // GET request for one icecream.
-router.get('/icecream,/:id', icecream_controller.icecream_detail);
+router.get('/icecream/:id', icecream_controller.icecream_detail);
 // GET request for list of all Costume items.
 router.get('/icecream', icecream_controller.icecream_list);
 module.exports = router;
+
