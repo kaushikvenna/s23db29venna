@@ -19,3 +19,10 @@ router.get('/icecream/:id', icecream_controller.icecream_detail);
 router.get('/icecream', icecream_controller.icecream_list);
 module.exports = router;
 
+// DELETE request for deleting a costume.
+router.delete('/icecream/:id', icecream_controller.icecream_delete);
+
+// GET detail icecream page 
+
+
+

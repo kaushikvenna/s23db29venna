@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    h1= title
+
+    form(id='createicecreamForm', method='POST', action='/resource/icecream')
+        div.form-group
+            label(for='flavour') icecream flavour:
+            input(type='text', class='form-control', id='flavour', name='flavour', required=true)
+        div.form-group
+            label(for='quantity') icecream quantity:
+            input(type='text', class='form-control', id='quantity', name='quantity', required=true)
+        div.form-group
+            label(for='price') icecream price:
+            input(type='text', class='form-control', id='price', name='price', required=true)
+        button(type='submit', class='btn btn-primary') Create icecream 
+
+    script.
+        document.getElementById('createicecreamForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch(event.target.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('icecream created successfully!');
+                } else {
+                    alert('Failed to create icecream. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('An error occurred while creating the icecream.');
+                console.error(error);
+            });
+        });
