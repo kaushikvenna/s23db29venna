@@ -1,22 +1,52 @@
 extends layout
+
 block content
-    h1= title
+  h1= title
+  if (toShow == null)
+    h2 No instance to detail, since the id is wrong 
+  else
     - let icecreamid = toShow._id
     - let flavour = toShow.flavour 
     - let quantity  = toShow.quantity 
     - let price = toShow.price 
-    div
-    div.row
-    div(class='icecreamAttr mr-3') icecream ID is:
-    div #{icecreamid}
-    div.row
-    div(class='icecreamAttr mr-3') icecream flavour is:
-    div #{flavour}
-    div.row
-    div(class='icecreamAttr mr-3') icecream quantity is:
-    div #{quantity}
-    div.row
-    div(class='icecreamAttr mr-3') icecream price is:
-    div #{price}
 
-    
+    div
+      div.row
+        div(class='icecreamAttr mr-3') icecream ID is:
+        div #{icecreamid}
+      div.row
+        div(class='icecreamAttr mr-3') icecream flavour is:
+        div #{flavour}
+      div.row
+        div(class='icecreamAttr mr-3') icecream quantity is:
+        div #{quantity}
+      div.row
+        div(class='icecreamAttr mr-3') icecream price is:
+        div #{price}
+
+    button(class="btn btn-danger m-2" onclick="detailOnid()") Detail
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        // Go back to the home page for the ice cream collection
+        window.location.href='/icecream'
+      }
+
+    script.
+      function detailOnid() {
+        console.log("starting detail")
+        // perform detail action
+        fetch(actionid, {
+          method: 'DETAIL' // Don't need a body for the detail
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Detail succeeded")
+          window.location.href='/icecream'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Detail failed " + error )
+        });
+      }
